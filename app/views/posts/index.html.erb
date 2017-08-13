@@ -1,34 +1,43 @@
-<p id="notice"><%= notice %></p>
-Hi <%= current_user.name %>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div style="width: 80%; margin-left: 10%;">
+  <div style="float: right;">
+    <p id="notice"><%= notice %></p>
+    Hi <%= current_user&.name %>,
+    <% if user_signed_in? %>
+      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<h1 style="text-align: center;">Blogs of Tien</h1>
+<%= link_to 'New Post', new_post_path, {style: "margin-left: 10%;", class: "button"} %>
 
-<br>
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-  </li>
-<% end %>
-<%= link_to 'New Post', new_post_path %>
+<div class="index align-left" style="margin-left: 10%; width: 80%;">
+  <!-- Definition List -->
+
+  <section>
+   <!--  <header>
+      <h3>Follow me <code style="color: red;">ptnk1995</code></h3><br/>
+      <%= image_tag "tien.jpg", style: "" %>
+      <ul class="icons">
+        <li><a href="#" class="icon style1 fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon style1 fa-facebook"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon style1 fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon style1 fa-github"><span class="label">Github</span></a></li>
+        <li><a href="#" class="icon style1 fa-dribbble"><span class="label">Dribbble</span></a></li>
+      </ul>
+
+    </header> -->
+    <div class="content">
+      <% @posts.each do |post| %>
+        <div >
+        <h2><%= post.title %></h2></dt>
+        <p><%= post.content %></p>
+        <%= link_to 'Show', post %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+        <hr />
+      <% end %>
+    </div>
+  </section>
+</div>
